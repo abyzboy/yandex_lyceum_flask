@@ -21,6 +21,9 @@ class Jobs(SqlAlchemyBase):
     end_date = sqlalchemy.Column(sqlalchemy.DateTime)
     is_finished = sqlalchemy.Column(sqlalchemy.Boolean)
 
+    def __repr__(self):
+        return f'<Job> {self.job}'
+
     def get_collabarators_by_id_to_string(self):
         return ', '.join([str(x.id) for x in self.collaborators])
 

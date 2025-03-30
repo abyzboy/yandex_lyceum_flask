@@ -1,10 +1,17 @@
 import datetime
 import sqlalchemy
 from sqlalchemy import orm
-from database.db_session import SqlAlchemyBase
+from database.db_session import SqlAlchemyBase, create_session
+from flask_login import UserMixin
+from extensions import login_manager
 
 
-class User(SqlAlchemyBase):
+@login_manager.user_loader
+def load_user(user_id):
+    return create_session().query(User).filter(User.id == user_id).first()
+
+
+class User(UserMixin, SqlAlchemyBase):
     __tablename__ = 'users'
 
     id = sqlalchemy.Column(sqlalchemy.Integer,

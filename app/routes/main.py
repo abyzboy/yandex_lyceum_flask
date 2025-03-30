@@ -1,6 +1,7 @@
 from flask import Blueprint, render_template
 from database.db_session import create_session
 from models.all_models import Jobs
+from flask_login import current_user
 main_bp = Blueprint('main', __name__)
 
 
