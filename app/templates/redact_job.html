@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block content %}
+    <h2>Редактирование</h2>
+    <form method="POST" action="{{url_for('job.redact', job_id=job_id)}}">
+        {{ form.hidden_tag() }}
+        <div>
+            {{ form.job.label }}<br>
+            {{ form.job(size=32) }}<br>
+            {% for error in form.job.errors %}
+                <span style="color: red;">{{ error }}</span><br>
+            {% endfor %}
+        </div>
+        <div>
+            {{ form.worksize.label }}<br>
+            {{ form.worksize(size=32) }}<br>
+            {% for error in form.worksize.errors %}
+                <span style="color: red;">{{ error }}</span><br>
+            {% endfor %}
+        </div>
+        <div>
+            {{ form.collabarators.label }}<br>
+            {{ form.collabarators(size=32) }}<br>
+            {% for error in form.collabarators.errors %}
+                <span style="color: red;">{{ error }}</span><br>
+            {% endfor %}
+        </div>
+        <div>
+            {{ form.is_finished.label }}<br>
+            {{ form.is_finished(size=32) }}<br>
+            {% for error in form.is_finished.errors %}
+                <span style="color: red;">{{ error }}</span><br>
+            {% endfor %}
+        </div>
+        </div>
+        <div>
+            {{ form.submit() }}
+        </div>
+    </form>
+{% endblock %}

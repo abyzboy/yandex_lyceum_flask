@@ -16,6 +16,11 @@
     </div>
     {% endif %}
     <div class="text-center"><h3 class="custom-header-large">Works log</h3></div>
+    {% if current_user.is_authenticated %}
+    <div class="text-center">
+        <a href="{{url_for('job.create')}}"><button class="btn btn-success mb-3">Создать</button></a>
+    </div>
+    {% endif %}
     <div class="table-responsive">
         {% for job in jobs %}
         <p class="custom-action-large">Action # {{job.id}}</p>
@@ -39,6 +44,10 @@
                 </tr>
             </tbody>
         </table>
+        {% if current_user.id == 1 or current_user.id == job.team_leader_id%}
+            <a href="{{url_for('job.delete', job_id=job.id)}}"><button type="button" class="btn btn-danger btn-sm">Delete</button></a>
+            <a href="{{url_for('job.redact', job_id=job.id)}}"><button type="button" class="btn btn-secondary btn-sm me-2">Edit job</button></a>
+        {%endif%}
         {% endfor %}
     </div>
 {% endblock %}
