@@ -19,4 +19,4 @@ class RedactJobForm(FlaskForm):
         DataRequired()])
     collabarators = StringField('Помошники')
     is_finished = BooleanField('Завершить работу')
-    submit = SubmitField("Создать")
+    submit = SubmitField("Изменить")

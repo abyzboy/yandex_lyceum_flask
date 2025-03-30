@@ -10,6 +10,13 @@ def add_collaborator(db_ses: Session, job: Jobs, collaborator_id):
         job.collaborators.append(collaborator)
 
 
+def add_members(db_ses: Session, department: Department, member_id):
+    member = db_ses.query(User).filter(
+        User.id == member_id).first()
+    if member:
+        department.members.append(member)
+
+
 def add_user(db_ses: Session, surname, name, age, position, speciality, address, email, hashed_password):
     user = User(surname=surname, name=name, age=age, position=position,
                 speciality=speciality, address=address, email=email, hashed_password=hashed_password)

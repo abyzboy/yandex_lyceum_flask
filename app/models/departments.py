@@ -9,9 +9,14 @@ class Department(SqlAlchemyBase):
 
     id = sqlalchemy.Column(sqlalchemy.Integer,
                            primary_key=True, autoincrement=True)
-    user = orm.relationship('User')
+    chief = orm.relationship('User')
     title = sqlalchemy.Column(sqlalchemy.String)
-    chief = sqlalchemy.Column(
+    chief_id = sqlalchemy.Column(
         sqlalchemy.Integer, sqlalchemy.ForeignKey('users.id'))
-    members = sqlalchemy.Column(sqlalchemy.String)
+    members = orm.relationship("User",
+                               secondary="users_to_department",
+                               back_populates="departments")
     email = sqlalchemy.Column(sqlalchemy.String)
+
+    def get_members_by_id_to_string(self):
+        return ', '.join([str(x.id) for x in self.members])

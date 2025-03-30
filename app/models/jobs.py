@@ -15,7 +15,7 @@ class Jobs(SqlAlchemyBase):
     job = sqlalchemy.Column(sqlalchemy.String)
     work_size = sqlalchemy.Column(sqlalchemy.Integer)
     collaborators = orm.relationship("User",
-                                     secondary="association",
+                                     secondary="users_to_jobs",
                                      back_populates="collaborators_jobs")
     start_date = sqlalchemy.Column(sqlalchemy.DateTime)
     end_date = sqlalchemy.Column(sqlalchemy.DateTime)

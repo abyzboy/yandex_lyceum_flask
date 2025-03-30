@@ -26,9 +26,12 @@ class User(UserMixin, SqlAlchemyBase):
     hashed_password = sqlalchemy.Column(sqlalchemy.String)
     modified_date = sqlalchemy.Column(sqlalchemy.DateTime)
     collaborators_jobs = orm.relationship("Jobs",
-                                          secondary="association",
+                                          secondary="users_to_jobs",
                                           back_populates="collaborators")
     created_jobs = orm.relationship('Jobs', back_populates='team_leader')
+    departments = orm.relationship("Department",
+                                   secondary="users_to_department",
+                                   back_populates="members")
 
     def __repr__(self):
         return f'<Colonist> {self.id} {self.surname} {self.name}'

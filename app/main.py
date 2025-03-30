@@ -4,6 +4,7 @@ from models.all_models import *
 from routes.main import main_bp
 from routes.user import user_bp
 from routes.job import job_bp
+from routes.departament import department_bp
 from extensions import login_manager
 
 app = Flask(__name__)
@@ -14,6 +15,7 @@ def main():
     db_session.global_init('app\\mars_explorer.sqlite')
     app.register_blueprint(job_bp)
     app.register_blueprint(main_bp)
+    app.register_blueprint(department_bp)
     app.register_blueprint(user_bp)
     login_manager.init_app(app)
     login_manager.login_view = 'user.login'
