@@ -42,7 +42,7 @@
         </table>
         {% if current_user.id == 1 or current_user.id == department.chief_id%}
             <a href="{{url_for('department.delete', department_id=department.id)}}"><button type="button" class="btn btn-danger btn-sm">Delete</button></a>
-            <a href="{{url_for('department.redact', department_id=department.id)}}"><button type="button" class="btn btn-secondary btn-sm me-2">Edit job</button></a>
+            <a href="{{url_for('department.redact', department_id=department.id)}}"><button type="button" class="btn btn-secondary btn-sm me-2">Edit</button></a>
         {%endif%}
         {% endfor %}
     </div>
