@@ -6,17 +6,18 @@ from models.all_models import *
 def add_collaborator(db_ses: Session, job: Jobs, collaborator_id):
     collaborator = db_ses.query(User).filter(
         User.id == collaborator_id).first()
-    job.collaborators.append(collaborator)
+    if collaborator:
+        job.collaborators.append(collaborator)
 
 
-def add_user(db_ses: Session, surname, name, age, position, speciality, address, email):
+def add_user(db_ses: Session, surname, name, age, position, speciality, address, email, hashed_password):
     user = User(surname=surname, name=name, age=age, position=position,
-                speciality=speciality, address=address, email=email)
+                speciality=speciality, address=address, email=email, hashed_password=hashed_password)
     # Проверка существует ли пользователь с такой же почтой
     if not db_ses.query(User).filter(User.email == email).first():
         db_ses.add(user)
         db_ses.commit()
-        db_ses.close()
+    return user
 
 
 def add_job(db_ses: Session, team_leader_id, job, work_size, collaborators, start_date, is_finished):
